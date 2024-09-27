@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MonsterType" load_steps=4 format=3 uid="uid://dyifxl4yxp4ik"]
+
+[ext_resource type="Script" path="res://resources/monster_types/monster_type.gd" id="1_4lc1p"]
+[ext_resource type="Texture2D" uid="uid://dmdvpikxkx78x" path="res://resources/monster_types/skeleton.png" id="2_v8t0f"]
+[ext_resource type="PackedScene" uid="uid://qpyya7w1svv5" path="res://scenes/weapons/weapon_ranged.tscn" id="3_k7aj5"]
+
+[resource]
+script = ExtResource("1_4lc1p")
+texture = ExtResource("2_v8t0f")
+max_health = 2
+move_speed = 20.0
+acceleration = 5.0
+mass = 1.0
+weapon_scene = ExtResource("3_k7aj5")

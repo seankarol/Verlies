@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4cy1qr6eggo7"]
+
+[ext_resource type="Texture2D" uid="uid://dnwp5ce2go3t4" path="res://scenes/arrow/arrow.png" id="1_e3oe7"]
+[ext_resource type="Script" path="res://scenes/arrow/arrow.gd" id="1_y5din"]
+[ext_resource type="Script" path="res://components/hurtbox_area_2d.gd" id="3_n8yi3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uk87d"]
+size = Vector2(8, 3)
+
+[node name="Arrow" type="Sprite2D"]
+texture = ExtResource("1_e3oe7")
+script = ExtResource("1_y5din")
+
+[node name="HurtboxArea2D" type="Area2D" parent="."]
+z_index = 2
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("3_n8yi3")
+enabled = null
+push = 50.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxArea2D"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_uk87d")
+
+[connection signal="hit" from="HurtboxArea2D" to="." method="_on_hurtbox_area_2d_hit"]

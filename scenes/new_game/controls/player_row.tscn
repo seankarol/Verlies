@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvhy0qsrwy5vb"]
+
+[ext_resource type="Script" path="res://scenes/new_game/controls/player_row.gd" id="1_42gox"]
+
+[node name="PlayerRow" type="HBoxContainer"]
+script = ExtResource("1_42gox")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LeaveButton" type="Button" parent="."]
+layout_mode = 2
+text = "LEAVE"
+
+[connection signal="pressed" from="LeaveButton" to="." method="_on_leave_button_pressed"]

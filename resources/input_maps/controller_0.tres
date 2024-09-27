@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="PlayerInputMap" load_steps=2 format=3 uid="uid://ooebb3en8on2"]
+
+[ext_resource type="Script" path="res://resources/input_maps/player_input_map.gd" id="1_ofqq4"]
+
+[resource]
+script = ExtResource("1_ofqq4")
+name = "GamePad 1"
+move_up = &"move_up_gp0"
+move_right = &"move_right_gp0"
+move_down = &"move_down_gp0"
+move_left = &"move_left_gp0"
+look_up = &"look_up_gp0"
+look_right = &"look_right_gp0"
+look_down = &"look_down_gp0"
+look_left = &"look_left_gp0"
+look_mouse = false
+attack = &"attack_gp0"
+start = &"start_gp0"

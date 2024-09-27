@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://qpyya7w1svv5"]
+
+[ext_resource type="Script" path="res://scenes/weapons/weapon_ranged.gd" id="1_mcgmp"]
+[ext_resource type="PackedScene" uid="uid://c4cy1qr6eggo7" path="res://scenes/arrow/arrow.tscn" id="2_2d1go"]
+[ext_resource type="Texture2D" uid="uid://diebalby2a0i1" path="res://scenes/weapons/bow.png" id="2_g57ea"]
+
+[sub_resource type="Animation" id="Animation_nnvof"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c2ewj"]
+resource_name = "attack"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(0, 0), Vector2i(1, 0), Vector2i(0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fire"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uu47c"]
+_data = {
+"RESET": SubResource("Animation_nnvof"),
+"attack": SubResource("Animation_c2ewj")
+}
+
+[node name="Weapon" type="Node2D"]
+position = Vector2(0, -7)
+script = ExtResource("1_mcgmp")
+projectile_scene = ExtResource("2_2d1go")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 2
+texture = ExtResource("2_g57ea")
+offset = Vector2(8, 0)
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_uu47c")
+}

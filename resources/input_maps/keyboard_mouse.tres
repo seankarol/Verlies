@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="PlayerInputMap" load_steps=2 format=3 uid="uid://si258nfcbx2b"]
+
+[ext_resource type="Script" path="res://resources/input_maps/player_input_map.gd" id="1_6wjs8"]
+
+[resource]
+script = ExtResource("1_6wjs8")
+name = "Keyboard & Mouse"
+move_up = &"move_up_kb"
+move_right = &"move_right_kb"
+move_down = &"move_down_kb"
+move_left = &"move_left_kb"
+look_up = &""
+look_right = &""
+look_down = &""
+look_left = &""
+look_mouse = true
+attack = &"attack_kb"
+start = &"start_kb"

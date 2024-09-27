@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="PlayerInputMap" load_steps=2 format=3 uid="uid://cydlar5omouuv"]
+
+[ext_resource type="Script" path="res://resources/input_maps/player_input_map.gd" id="1_0xvhm"]
+
+[resource]
+script = ExtResource("1_0xvhm")
+name = "GamePad 2"
+move_up = &"move_up_gp1"
+move_right = &"move_right_gp1"
+move_down = &"move_down_gp1"
+move_left = &"move_left_gp1"
+look_up = &"look_up_gp1"
+look_right = &"look_right_gp1"
+look_down = &"look_down_gp1"
+look_left = &"look_left_gp1"
+look_mouse = false
+attack = &"attack_gp1"
+start = &"start_gp1"

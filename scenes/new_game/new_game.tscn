@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://bo3o37vrrrlsi"]
+
+[ext_resource type="Script" path="res://scenes/new_game/new_game.gd" id="1_gai2d"]
+[ext_resource type="Resource" uid="uid://ooebb3en8on2" path="res://resources/input_maps/controller_0.tres" id="2_hyh6s"]
+[ext_resource type="Script" path="res://resources/input_maps/player_input_map.gd" id="2_w31ce"]
+[ext_resource type="Resource" uid="uid://cydlar5omouuv" path="res://resources/input_maps/controller_1.tres" id="3_86sox"]
+[ext_resource type="Resource" uid="uid://si258nfcbx2b" path="res://resources/input_maps/keyboard_mouse.tres" id="4_pf284"]
+
+[node name="NewGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gai2d")
+input_maps = Array[ExtResource("2_w31ce")]([ExtResource("2_hyh6s"), ExtResource("3_86sox"), ExtResource("4_pf284")])
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.329412, 0.278431, 0.45098, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Press Space or Start to Join"
+horizontal_alignment = 1
+
+[node name="PlayerContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "Start"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

@@ -1,0 +1,148 @@
+[gd_scene load_steps=15 format=3 uid="uid://dplc15oduge5p"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_3atuc"]
+[ext_resource type="PackedScene" uid="uid://dn0m6ul1x0l6i" path="res://scenes/player/player_dead.tscn" id="2_22iue"]
+[ext_resource type="Shader" path="res://scenes/game_sprite.gdshader" id="2_dbvff"]
+[ext_resource type="Texture2D" uid="uid://cnssnsqtfrup2" path="res://scenes/player/player.png" id="2_kwgde"]
+[ext_resource type="AudioStream" uid="uid://bfyak87vqhydq" path="res://scenes/player/hurt.wav" id="5_4xji3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_moa4u"]
+radius = 4.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5ijjg"]
+resource_local_to_scene = true
+shader = ExtResource("2_dbvff")
+shader_parameter/active = null
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/palette_swap = false
+shader_parameter/palette_src = Color(0.92549, 0.341176, 0.458824, 1)
+shader_parameter/palette_dst = Color(0.333333, 0.8, 0.462745, 1)
+
+[sub_resource type="Animation" id="Animation_mwpq7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wfohg"]
+resource_name = "idle"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2i(0, 0), Vector2i(2, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6m7c1"]
+resource_name = "move"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2i(0, 1), Vector2i(2, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q802t"]
+_data = {
+"RESET": SubResource("Animation_mwpq7"),
+"idle": SubResource("Animation_wfohg"),
+"move": SubResource("Animation_6m7c1")
+}
+
+[sub_resource type="Animation" id="Animation_h0ib3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
+[sub_resource type="Animation" id="Animation_lbyu3"]
+resource_name = "hit"
+length = 1.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, null, true, false, true, false, true, false, true, false, true, false, true, false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_74v12"]
+_data = {
+"RESET": SubResource("Animation_h0ib3"),
+"hit": SubResource("Animation_lbyu3")
+}
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 6
+collision_mask = 19
+motion_mode = 1
+script = ExtResource("1_3atuc")
+dead_scene = ExtResource("2_22iue")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_moa4u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_5ijjg")
+position = Vector2(0, -7)
+texture = ExtResource("2_kwgde")
+hframes = 3
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_q802t")
+}
+autoplay = "idle"
+
+[node name="HitAnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_74v12")
+}
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_4xji3")
+
+[connection signal="animation_finished" from="Sprite2D/HitAnimationPlayer" to="." method="_on_hit_animation_player_animation_finished"]

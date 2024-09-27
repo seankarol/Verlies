@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MonsterType" load_steps=4 format=3 uid="uid://b7l5ufpr1udby"]
+
+[ext_resource type="Script" path="res://resources/monster_types/monster_type.gd" id="1_op38y"]
+[ext_resource type="Texture2D" uid="uid://cm4vmuc25hp1l" path="res://resources/monster_types/slime_fast.png" id="2_5voai"]
+[ext_resource type="PackedScene" uid="uid://ctx3soghdwfvd" path="res://scenes/weapons/weapon_touch.tscn" id="3_ncc0r"]
+
+[resource]
+script = ExtResource("1_op38y")
+texture = ExtResource("2_5voai")
+max_health = 2
+move_speed = 50.0
+acceleration = 12.0
+mass = 1.0
+weapon_scene = ExtResource("3_ncc0r")

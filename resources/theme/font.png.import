@@ -1,0 +1,25 @@
+[remap]
+
+importer="font_data_image"
+type="FontFile"
+uid="uid://ctegfsmkb1wo1"
+path="res://.godot/imported/font.png-1f2f087769f6ef73e0872fd677c23f0b.fontdata"
+
+[deps]
+
+source_file="res://resources/theme/font.png"
+dest_files=["res://.godot/imported/font.png-1f2f087769f6ef73e0872fd677c23f0b.fontdata"]
+
+[params]
+
+character_ranges=PackedStringArray("0-127")
+kerning_pairs=PackedStringArray()
+columns=16
+rows=8
+image_margin=Rect2i(0, 0, 0, 0)
+character_margin=Rect2i(0, 0, 0, 0)
+ascent=0
+descent=0
+fallbacks=[]
+compress=true
+scaling_mode=1
